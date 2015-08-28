@@ -6,23 +6,13 @@ var Todo = function(data) {
 
 // Class method: List tasks from local storage
 Todo.list = function() {
-  var tasks = [];
-  var src = localStorage.getItem("todo");
-  if (src) {
-    var json = JSON.parse(src);
-    for (var i = 0; i < json.length; i++) {
-      tasks.push(new Todo(json[i]));
-    }
-  }
-  return m.prop(tasks);
+  return m.request({method: "GET", url: "/tasks", type: Todo});
 }
 
 // Class method: Save tasks to local storage
 Todo.save = function(todoList) {
-  localStorage.setItem("todo",
-      JSON.stringify(todoList.filter(function(todo) {
-        return !todo.done();
-      })));
+  var data = todoList.filter(function(todo) { return !todo.done(); });
+  m.request({method: "POST", url: "/tasks", data: data});
 };
 
 // View Model
