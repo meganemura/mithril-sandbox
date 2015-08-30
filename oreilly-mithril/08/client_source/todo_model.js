@@ -11,7 +11,7 @@ Todo.list = function() {
 };
 
 Todo.save = function(todoList) {
-  return m.request({method: "POST", url: "/tasks", data: data});
+  return m.request({method: "POST", url: "/tasks", data: todoList});
 };
 
 module.exports = Todo;

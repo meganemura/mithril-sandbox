@@ -1,5 +1,6 @@
 var Todo = require("../client_source/todo_model");
 var assert = require("power-assert");
+var m = require("mithril");
 var sinon = require("sinon");
 sinon.xhr.supportsCORS = true;
 
