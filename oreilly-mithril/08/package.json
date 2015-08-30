@@ -7,5 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "meganemura",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "espower-loader": "^1.0.0",
+    "intelli-espower-loader": "^1.0.0",
+    "mocha": "^2.2.5",
+    "power-assert": "^1.0.0",
+    "sinon": "^1.16.1"
+  }
 }
