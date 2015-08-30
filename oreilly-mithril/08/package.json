@@ -11,6 +11,9 @@
   "devDependencies": {
     "espower-loader": "^1.0.0",
     "intelli-espower-loader": "^1.0.0",
+    "mithril": "^0.2.0",
+    "mithril-node-render": "^0.4.1",
+    "mithril-query": "^0.7.5",
     "mocha": "^2.2.5",
     "power-assert": "^1.0.0",
     "sinon": "^1.16.1"
