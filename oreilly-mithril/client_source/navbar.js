@@ -19,11 +19,24 @@ var NavBar = {
             m("li", {class: args.root === activeUrl ? "active" : ""}, [
               m("a", {href: args.root, config: m.route}, args.pages[args.root])
             ]),
-            m("li", [m("a[href='#about']", "About")]),
-            m("li", [m("a[href='#contact']", "Contact")])
+            m("li.dropdown", [
+              m("a.dropdown-toggle[aria-expanded='false'][data-toggle='dropdown'][href='#'][role='button']",
+                {class: args.root !== activeUrl ? "active" : ""},
+                [args.title + " ", m("span.caret")]),
+              m("ul.dropdown-menu[role='menu']",
+                Object.keys(args.pages).map(function(key) {
+                  if (key === args.root) {
+                    return "";
+                  }
+                  return m("li", [m("a", {href: key, config: m.route},
+                        [key === activeUrl ? m("span.glyphicon.glyphicon-triangle-right") : "",
+                        args.pages[key]])]);
+                })
+               )
+            ])
           ])
-        ])
-    ])
+          ])
+          ]);
   }
 };
 
