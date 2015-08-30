@@ -8,3 +8,7 @@
 ## 5.7
 
  * [Bootstrap starter template](http://getbootstrap.com/examples/starter-template/)
+
+## 7.6
+
+ * [PubSubJS](https://github.com/mroderick/PubSubJS)
