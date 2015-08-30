@@ -12,4 +12,4 @@ var titleModule = {
   }
 };
 
-module.exports = HomePage;
+module.exports = titleModule;
