@@ -61,3 +61,9 @@ var vm = {
     vm.page().source(vm.edit());
   }
 };
+
+m.route.mode = "pathname";
+m.route(document.getElementById("root"), "/FrontPage", {
+  "/:pagename": ViewPage,
+  "/:pagename/edit": EditPage
+});
