@@ -10,7 +10,7 @@ var NavBar = {
             m("span.icon-bar"),
             m("span.icon-bar")
           ]),
-          m("a.navbar-brand[href='#']", "Project name")
+          m("a.navbar-brand", {href: "#", config: m.route}, args.title)
         ]),
         m(".collapse.navbar-collapse[id='navbar']", [
           m("ul.nav.navbar-nav", [
