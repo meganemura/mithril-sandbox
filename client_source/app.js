@@ -30,5 +30,5 @@ var bootstrapComponent = {
 };
 
 if (typeof document !== "undefined") {
-  m.route(document.getElementById("root"), bootstrapComponent);
+  m.mount(document.getElementById("root"), bootstrapComponent);
 }
