@@ -1,3 +1,5 @@
+var m = require("mithril");
+
 var NavBar = require("./navbar");
 
 m.mount(document.getElementById("navbar"),
