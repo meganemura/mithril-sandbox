@@ -1,6 +1,7 @@
 var m = require("mithril");
 
 var NavBar = require("./navbar");
+var title = require("./pages/title");
 
 m.mount(document.getElementById("navbar"),
   m.component(NavBar, {
@@ -12,3 +13,7 @@ m.mount(document.getElementById("navbar"),
       "/tables": "Tables",
     }
   }));
+
+m.route(document.getElementById("root"), "/title", {
+  "/title": title
+});
