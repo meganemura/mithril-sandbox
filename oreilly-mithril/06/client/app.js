@@ -68,6 +68,7 @@ var ViewPage = {
     var self = this;
     this.pageName = m.route.param("pagename");
     this.edit = function() {
+      vm.startEdit();
       m.route("/" + self.pageName + "/edit");
     };
     vm.read(this.pageName);
@@ -99,14 +100,12 @@ var EditPage = {
   controller: function() {
     var self = this;
     this.pageName = m.route.param("pagename");
-    this.save = function() {
-      vm.save(self.pageName);
-      m.route("/" + self.pageName);
+    this.preview = function() {
+      m.route("/" + self.pageName + "/preview");
     };
     this.discard = function() {
       m.route("/" + self.pageName);
     };
-    vm.startEdit();
   },
   view: function(ctrl) {
     return m("div", [
@@ -114,14 +113,47 @@ var EditPage = {
         m("textarea", {onchange: m.withAttr("value", vm.edit)}, vm.edit()),   // ?
         m("br"),
         m("button", {onclick: ctrl.discard}, "Discard"),
+        m("button", {onclick: ctrl.preview}, "Confirm")
+        ]);
+  }
+};
+
+// Component for previewing edited page
+var PreviewPage = {
+  controller: function() {
+    var self = this;
+    this.pageName = m.route.param("pagename");
+    this.edit = function() {
+      m.route("/" + self.pageName + "/edit");
+    }
+    this.save = function() {
+      vm.save(self.pageName);
+      m.route("/" + self.pageName);
+    }
+  },
+  view: function(ctrl) {
+    return m("div", [
+        m("h1", ctrl.pageName),
+        m("pre", WikiPage.tokenize(vm.edit()).map(function(token) {
+          switch (token.type) {
+            case PlainTextType:
+              return token.text;
+            case LinkType:
+              return m("span", {style: {"textDecoration": "underline"}}, token.text);
+            case WikiNameType:
+              var suffix = vm.page().contains(token.text) ? "" : "?";
+              return m("span", {style: {"textDecoration": "underline"}}, token.text + suffix);
+          }
+        })),
+        m("button", {onclick: ctrl.edit}, "Back"),
         m("button", {onclick: ctrl.save}, "Save")
         ]);
   }
 };
 
-
 m.route.mode = "pathname";
 m.route(document.getElementById("root"), "/FrontPage", {
   "/:pagename": ViewPage,
-  "/:pagename/edit": EditPage
+  "/:pagename/edit": EditPage,
+  "/:pagename/preview": PreviewPage
 });
