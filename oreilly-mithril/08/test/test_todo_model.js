@@ -22,7 +22,7 @@ describe("myTodo", function() {
     beforeEach(function() {
       server = sinon.fakeServer.create();
       server.respondImmediately = true;
-      m.deps({XMLHttpRequest: server.shr});
+      m.deps({XMLHttpRequest: server.xhr});
     });
     afterEach(function() {
       server.restore();
