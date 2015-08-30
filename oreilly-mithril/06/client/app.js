@@ -62,6 +62,38 @@ var vm = {
   }
 };
 
+// Component for viewing page
+var ViewPage = {
+  controller: function() {
+    var self = this;
+    this.pageName = m.route.param("pagename");
+    this.edit = function() {
+      m.route("/" + self.pageName + "/edit");
+    };
+    vm.read(this.pageName);
+  },
+  view: function(ctrl) {
+    return m("div", [
+        m("h1", this.pageName),
+        m("pre", WikiPage.tokenize(vm.page().source()).map(function(token) {
+          switch (token.type) {
+            case PlainTextType:
+              return token.text;
+            case LinkType:
+              return m("a", {href: token.text}, token.text);
+            case WikiNameType:
+              if (vm.page().contains(token.text)) {
+                return m("a", {href: "/" + token.text, config: m.route}, token.text);
+              } else {
+                return m("a", {href: "/" + token.text, config: m.route}, token.text + "?");
+              }
+          }
+        })),
+        m("button", {onclick: ctrl.edit}, "Edit")
+    ]);
+  }
+};
+
 m.route.mode = "pathname";
 m.route(document.getElementById("root"), "/FrontPage", {
   "/:pagename": ViewPage,
