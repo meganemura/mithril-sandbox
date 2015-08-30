@@ -1,5 +1,7 @@
 var jsdom = require('jsdom');
 var render = require('mithril-node-render');
+var assert = require("power-assert");
+var MyTodoApp = require("../client_source/app");
 
 jsdom.env('<html>', function(errors, window) {
   describe("MyTodoApp.view via DOM", function() {
