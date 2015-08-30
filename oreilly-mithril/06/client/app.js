@@ -94,6 +94,32 @@ var ViewPage = {
   }
 };
 
+// Component for editing page
+var EditPage = {
+  controller: function() {
+    var self = this;
+    this.pageName = m.route.param("pagename");
+    this.save = function() {
+      vm.save(self.pageName);
+      m.route("/" + self.pageName);
+    };
+    this.discard = function() {
+      m.route("/" + self.pageName);
+    };
+    vm.startEdit();
+  },
+  view: function(ctrl) {
+    return m("div", [
+        m("h1", ctrl.pageName),
+        m("textarea", {onchange: m.withAttr("value", vm.edit)}, vm.edit()),   // ?
+        m("br"),
+        m("button", {onclick: ctrl.discard}, "Discard"),
+        m("button", {onclick: ctrl.save}, "Save")
+        ]);
+  }
+};
+
+
 m.route.mode = "pathname";
 m.route(document.getElementById("root"), "/FrontPage", {
   "/:pagename": ViewPage,
